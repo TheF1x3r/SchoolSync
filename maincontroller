@@ -1,0 +1,73 @@
+//
+//  ViewController.swift
+//  SchoolSync
+//
+//  Created by Adam Weston on 8/24/16.
+//  Copyright © 2016 PalisadianApps. All rights reserved.
+//
+
+import UIKit
+import Firebase
+import GoogleSignIn
+
+class ViewController: UIViewController, GIDSignInDelegate, GIDSignInUIDelegate{
+    
+    @IBOutlet weak var signInButton: GIDSignInButton!
+    
+    func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError!) {
+        FIRAuth.auth()?.signInWithCredential(credential, completion: { (User, error) in
+            if error != nil {
+                print(error?.localizedDescription)
+                return
+            }
+            print("user logged in...")
+            })
+            
+        {
+
+    }
+    func signIn(signIn: GIDSignIn!, didDisconnectWithUser user: GIDGoogleUser!, withError error: NSError!) {
+        
+    }
+    
+    func viewDidLoad() {
+        super.viewDidLoad()
+        
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance().uiDelegate = self
+        
+        
+        // Uncomment to automatically sign in the user.
+        //GIDSignIn.sharedInstance().signInSilently()
+        
+        // TODO(developer) Configure the sign-in button look/feel
+        // ...
+    }
+    
+    func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    func signInWillDispatch(signIn: GIDSignIn!, error: NSError!) {
+        
+
+            
+   
+            
+            if let error = error{
+                print(error.localizedDescription)
+               return
+    }
+    let authentication = user.authentication
+    let credential = FIRGoogleAuthProvider.credentialWithIDToken(authentication.idToken,
+    accessToken: authentication.accessToken)
+    }
+   
+        
+        
+        try! FIRAuth.auth()!.signOut()
+    }
+    
+
+}
+
